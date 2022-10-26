@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="icon" type="image/png" href="/static/img/favicon.png" />
+    <meta charset="utf-8"/>
+    <meta name="author" content="Codecool"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <title>Your cart</title>
+
+    <!-- Bootstrap components -->
+    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+    <!-- Latest compiled and minified Jquery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="/static/js/cart.js" defer></script>
+    <!--Latest compiled and minified Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!-- End of Bootstrap components -->
+
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
+</head>
+
+<body>
+<div th:replace="header.html :: copy"></div>
+<div class="text-left">
+
+</div>
+
+<div class="container">
+    <h1 id="item-count" th:text="${itemCount}+' Items in cart:'"></h1>
+    <div id="products" class="row">
+        <div class="col col-sm-6 col-md-3 col-lg-2" th:each="prod : ${productMap}">
+            <div class="card">
+                <button class="btn btn-success delete-btn" th:data-product_id="${prod.key.id}" style="float: right">X
+                </button>
+                <img class="" src="http://placehold.it/400x250/000/fff"
+                     th:attr="src='./static/img/product_' + ${prod.key.id} + '.jpg'" alt=""/>
+                <div class="card-header">
+                    <h4 class="card-title" th:text="${prod.key.name}">Product name</h4>
+                </div>
+                <div class="card-body">
+                    <div class="card-text">
+                        <p class="lead price" th:data-count="${prod.value}" th:data-price="${prod.key.getPrice()}"
+                           th:text="${prod.key.getPrice()}+'/pcs'">100 USD</p>
+                    </div>
+                    <div class="card-text item-count-container">
+                        <button class="btn btn-success decrease-count-btn" th:data-product_id="${prod.key.id}">-
+                        </button>
+                        <input class="item-count-input" type="text" th:data-product_id="${prod.key.id}"
+                               th:value="${prod.value}">
+                        <button class="btn btn-success increase-count-btn" th:data-product_id="${prod.key.id}">+
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="total">Total: <span th:text="${total}+'$'">0 USD</span></div>
+    <div class="text-left">
+        <a class="btn btn-success" href="/">Continue shopping</a>
+        <a class="btn btn-success" href="/product/checkout">Checkout</a>
+    </div>
+</div>
+
+<div th:replace="footer.html :: copy"></div>
+</body>
+</html>

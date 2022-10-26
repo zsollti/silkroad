@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="icon" type="image/png" href="/static/img/favicon.png" />
+    <meta charset="utf-8"/>
+    <meta name="author" content="Codecool"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <title>Payment</title>
+
+    <!-- Bootstrap components -->
+    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+    <!-- Latest compiled and minified Jquery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="/static/js/cart.js" defer></script>
+    <!--Latest compiled and minified Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!-- End of Bootstrap components -->
+
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
+</head>
+
+<body>
+<div th:replace="header.html :: copy"></div>
+<div class="text-left">
+</div>
+
+<div class="container">
+    <h5 class="card-title">Credit Card Payment</h5>
+    <form action="/order-confirmation" method="post">
+        <div class="form-group">
+            <label for="card-number">Card number</label>
+            <input type="text" pattern="[0-9]*" class="form-control" id="card-number" name="card-number" placeholder="Card number" maxlength="16" minlength="15" required>
+        </div>
+        <div style="display: inline; width: 49%" class="form-group">
+            <label>Expiration date</label>
+            <input style="width: 55px; display:inline" type="text" pattern="[0-9]*" class="form-control" id="expiration-month" name="expiration-month"
+                   placeholder="00" maxlength="2" minlength="2" required> /
+            <input style="width: 55px; display:inline" type="text" pattern="[0-9]*" class="form-control" id="expiration-year" name="expiration-year"
+                   placeholder="00" maxlength="2" minlength="2" required>
+        </div>
+        <div style=" float: right; width: 49%" class="form-group">
+            <label  for="cvv">CVV</label>
+            <input style="width: 60px; display: inline" type="password" pattern="[0-9]*" class="form-control" id="cvv" name="cvv" placeholder="XXX" maxlength="3" minlength="3" required>
+        </div>
+        <div class="form-group">
+            <label for="card-holder">Card holder</label>
+            <input type="text" class="form-control" id="card-holder" name="card-holder" placeholder="Card holder" required>
+        </div>
+        <div class="text">
+            Total price: <span th:text="${totalPrice}"></span> $
+        </div>
+        <div class="form-group">
+        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif"
+               border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+        <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1"
+             height="1">
+        </div>
+    </form>
+
+
+</div>
+<div th:replace="footer.html :: copy"></div>
+
+</body>
+</html>
